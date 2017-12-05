@@ -7,9 +7,7 @@ class Details extends Component {
         super()
     }
     componentDidMount = () => {
-        if (!this.props.details.id) {
-            this.props.getDetails(this.props.match.params.id)
-        }
+        this.props.getDetails(this.props.match.params.id)
     }
     render() {
         let task = this.props.details
@@ -25,7 +23,7 @@ class Details extends Component {
                 <input value={task.description} onChange={e => this.props.handleChange('description', e.target.value)} />
                 &nbsp;
                 Completed: {String(task.completed)}
-                {<input type='checkbox' value={task.completed} onChange={e => this.props.handleChange('completed', !task.completed)} />}
+                {<input type='checkbox' value={!task.completed} onChange={e => this.props.handleChange('completed', !task.completed)} />}
                 <button onClick={() => this.props.submit(task).then(() => this.props.history.push(`/home`))} >SAVE</button>
                 <button onClick={this.componentDidMount} >CANCEL</button>
                 <button onClick={() => this.props.deleteTask(task).then(() => this.props.history.push(`/home`))} >DELETE</button>
